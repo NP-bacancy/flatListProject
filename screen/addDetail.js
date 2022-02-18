@@ -6,11 +6,9 @@ const AddDetail = (props) => {
     const [detail, setDetail] = useState([]);
     let recFname = props.navigation.getParam('Data','');
     console.log(recFname);
-    if (recFname !== '' && detail.length < 2) {
-        setDetail([...detail,recFname]);
-    }
     const FetchDetail = () => {
         props.navigation.navigate('TD');
+        setDetail([...detail,recFname]);
     };
 
     return (
