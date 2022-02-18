@@ -4,17 +4,30 @@ import {View, Button, Text, FlatList} from 'react-native';
 
 const AddDetail = (props) => {
     const [detail, setDetail] = useState([]);
-    let recFname = props.navigation.getParam('Data','');
-    console.log(recFname);
+    const [disable, setDisable] = useState(false);
+    // let recFname = props.navigation.getParam('Data','');
+    // console.log(recFname);
+    useEffect(() =>{
+        let recFname = props.navigation.getParam('Data','');
+        // console.log(recFname);
+        if (recFname !== '') {
+        setDetail(currentDetail => [...currentDetail,recFname]);}
+    },[props.navigation]);
     const FetchDetail = () => {
         props.navigation.navigate('TD');
-        setDetail([...detail,recFname]);
+        if (detail.length > 8){
+            console.log(detail.length);
+            setDisable(true);
+        }
+        // console.log(detail.length);
+        // setDetail([...detail,recFname]);
     };
 
     return (
         <View>
             <Button title="Add Detail"
             onPress={FetchDetail}
+            disabled = {disable}
             />
             {/* <Text>{JSON.stringify(recFname)}</Text> */}
             <FlatList
